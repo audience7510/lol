@@ -1,0 +1,24 @@
+server:
+  tomcat:
+    #设置post请求数据无大小限制
+    max-http-form-post-size: -1
+  servlet:
+    context-path: /hero
+  port: 8098
+
+spring:
+  application:
+    name: service-hero
+    main:
+      allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+  # 直接启动默认使用 local 环境的配置，Dockerfile 默认使用 single 环境的配置
+  profiles:
+    active: dev
+
+
+# ====================aliyun oos====================
+aliyun:
+  endpoint: oss-cn-beijing.aliyuncs.com
+  keyid: LTAI5tFLnw6xDQFyVBbPCiNy
+  keysecret: CHMkvCMjZ9KL7ALv0MdRg40ehVfxkg
+  bucketname: audience7510
