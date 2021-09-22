@@ -61,7 +61,7 @@ public class UserController {
     @ApiOperation(value = "新增用户",notes = "新增用户之后，设置默认登录账号和密码")
     public Result add(@RequestBody User user) {
         String pinyin = PinyinUtil.getPinyin(user.getUserName());
-        user.setLoginName(pinyin);
+        user.setLoginName(pinyin.replace(" ",""));
         user.setPassWord(Contain.PASSWORD);
         user.setCreateTime(DateUtil.now());
         boolean save = userService.save(user);
