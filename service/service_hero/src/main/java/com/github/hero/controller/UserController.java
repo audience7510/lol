@@ -82,6 +82,7 @@ public class UserController {
     @PostMapping("update")
     @ApiOperation(value = "修改用户信息",notes = "修改用户的信息")
     public Result update(@RequestBody User user) {
+        user.setUpdateTime(DateUtil.now());
         boolean update = userService.updateById(user);
         if (update){
             return ResultGenerator.success();
