@@ -52,7 +52,7 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
         MovieDescription movieDescription = new MovieDescription();
         movieDescription.setDescription(movieInfoVo.getDescription());
         //设置描述id就是课程id
-        movieDescription.setId(id);
+        movieDescription.setMovieId(id);
         movieDescription.setCreateTime(DateUtil.now());
         movieDescriptionService.save(movieDescription);
         return id;
