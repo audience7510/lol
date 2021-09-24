@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     @ApiModelProperty("主键id")
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_UUID)
     private String id;
 
     @ApiModelProperty("名称")

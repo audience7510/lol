@@ -11,12 +11,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@TableName("equipment_subject")
+@TableName("subject")
 @ApiModel("装备分类实体类")
-public class EquipmentSubject implements Serializable {
+public class Subject implements Serializable {
 
     @ApiModelProperty("主键id")
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ASSIGN_UUID)
     private String id;
 
     @ApiModelProperty("类别名称")

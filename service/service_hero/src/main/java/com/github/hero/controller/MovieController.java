@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020-03-02
  */
 @RestController
-@RequestMapping("/eduservice/course")
+@RequestMapping("/movie")
 @CrossOrigin
 public class MovieController {
 

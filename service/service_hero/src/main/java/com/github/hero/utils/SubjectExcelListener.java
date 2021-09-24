@@ -6,7 +6,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.hero.common.ResultCode;
 import com.github.hero.handler.LolException;
-import com.github.hero.pojo.EquipmentSubject;
+import com.github.hero.pojo.Subject;
 import com.github.hero.pojo.SubjectData;
 import com.github.hero.service.IEquipmentService;
 
@@ -29,9 +29,9 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
 
         //一行一行读取，每次读取有两个值，第一个值一级分类，第二个值二级分类
         //判断一级分类是否重复
-        EquipmentSubject existOneSubject = this.existOneSubject(equipmentService, subjectData.getOneSubjectName());
+        Subject existOneSubject = this.existOneSubject(equipmentService, subjectData.getOneSubjectName());
         if(existOneSubject == null) { //没有相同一级分类，进行添加
-            existOneSubject = new EquipmentSubject();
+            existOneSubject = new Subject();
             existOneSubject.setParentId("0");
             existOneSubject.setTitle(subjectData.getOneSubjectName());//一级分类名称
             existOneSubject.setCreateTime(DateUtil.now());
@@ -43,9 +43,9 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
 
         //添加二级分类
         //判断二级分类是否重复
-        EquipmentSubject existTwoSubject = this.existTwoSubject(equipmentService, subjectData.getTwoSubjectName(), pid);
+        Subject existTwoSubject = this.existTwoSubject(equipmentService, subjectData.getTwoSubjectName(), pid);
         if(existTwoSubject == null) {
-            existTwoSubject = new EquipmentSubject();
+            existTwoSubject = new Subject();
             existTwoSubject.setParentId(pid);
             existTwoSubject.setTitle(subjectData.getTwoSubjectName());//二级分类名称
             existTwoSubject.setCreateTime(DateUtil.now());
@@ -54,20 +54,20 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
     }
 
     //判断一级分类不能重复添加
-    private EquipmentSubject existOneSubject(IEquipmentService equipmentService,String name) {
-        QueryWrapper<EquipmentSubject> wrapper = new QueryWrapper<>();
+    private Subject existOneSubject(IEquipmentService equipmentService, String name) {
+        QueryWrapper<Subject> wrapper = new QueryWrapper<>();
         wrapper.eq("title",name);
         wrapper.eq("parent_id","0");
-        EquipmentSubject oneSubject = equipmentService.getOne(wrapper);
+        Subject oneSubject = equipmentService.getOne(wrapper);
         return oneSubject;
     }
 
     //判断二级分类不能重复添加
-    private EquipmentSubject existTwoSubject(IEquipmentService equipmentService,String name,String pid) {
-        QueryWrapper<EquipmentSubject> wrapper = new QueryWrapper<>();
+    private Subject existTwoSubject(IEquipmentService equipmentService, String name, String pid) {
+        QueryWrapper<Subject> wrapper = new QueryWrapper<>();
         wrapper.eq("title",name);
         wrapper.eq("parent_id",pid);
-        EquipmentSubject twoSubject = equipmentService.getOne(wrapper);
+        Subject twoSubject = equipmentService.getOne(wrapper);
         return twoSubject;
     }
 

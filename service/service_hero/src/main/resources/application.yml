@@ -19,6 +19,8 @@ spring:
 # ====================aliyun oos====================
 aliyun:
   endpoint: oss-cn-beijing.aliyuncs.com
-  keyid: key
-  keysecret: value
-  bucketname: bucketname
+  keyid: LTAI5tLkhUC8833MEUrdLqqa
+  keysecret: qn2bngeDpoug02vbR2kwXg3bCvhLs2
+  bucketname: audience7510
+
+

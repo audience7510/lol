@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("user")
@@ -55,6 +57,15 @@ public class UserController {
         queryWrapper.orderByDesc("create_time");
         IPage<User> iPage = userService.page(page, queryWrapper);
         return ResultGenerator.success(iPage);
+    }
+
+    @GetMapping("findAll")
+    @ApiOperation(value = "查询所有用户列表",notes = "查询所有用户列表，全查，列表返回")
+    public Result findAll() {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("is_delete","0");
+        List<User> list = userService.list(queryWrapper);
+        return ResultGenerator.success(list);
     }
 
     @PostMapping("add")

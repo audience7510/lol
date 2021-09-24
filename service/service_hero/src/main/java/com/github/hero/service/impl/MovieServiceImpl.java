@@ -55,6 +55,6 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
         movieDescription.setMovieId(id);
         movieDescription.setCreateTime(DateUtil.now());
         movieDescriptionService.save(movieDescription);
-        return id;
+        return String.valueOf(id);
     }
 }

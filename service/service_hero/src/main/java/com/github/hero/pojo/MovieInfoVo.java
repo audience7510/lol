@@ -16,6 +16,9 @@ public class MovieInfoVo {
     @ApiModelProperty(value = "分类ID")
     private String subjectId;
 
+    @ApiModelProperty(value = "分类ID")
+    private String subjectParentId;
+
     @ApiModelProperty(value = "视频标题")
     private String title;
 
