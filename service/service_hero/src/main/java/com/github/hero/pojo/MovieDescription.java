@@ -21,12 +21,9 @@ public class MovieDescription implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "描述ID")
+    @ApiModelProperty(value = "视频ID")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
-
-    @ApiModelProperty(value = "视频ID")
-    private String movieId;
 
     @ApiModelProperty(value = "视频简介")
     private String description;

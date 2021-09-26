@@ -16,4 +16,8 @@ public interface IMovieService extends IService<Movie> {
 
     //添加课程基本信息的方法
     String saveCourseInfo(MovieInfoVo movieInfoVo);
+
+    MovieInfoVo getMovieInfo(String movieId);
+
+    void updateMovieInfo(MovieInfoVo movieInfoVo);
 }

@@ -13,7 +13,6 @@ import com.github.hero.service.IMovieService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -52,9 +51,34 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
         MovieDescription movieDescription = new MovieDescription();
         movieDescription.setDescription(movieInfoVo.getDescription());
         //设置描述id就是课程id
-        movieDescription.setMovieId(id);
+        movieDescription.setId(id);
         movieDescription.setCreateTime(DateUtil.now());
         movieDescriptionService.save(movieDescription);
         return String.valueOf(id);
+    }
+
+    @Override
+    public MovieInfoVo getMovieInfo(String movieId) {
+        Movie movie = baseMapper.selectById(movieId);
+        MovieInfoVo movieInfoVo = new MovieInfoVo();
+        BeanUtils.copyProperties(movie,movieInfoVo);
+        MovieDescription byId = movieDescriptionService.getById(movieId);
+        movieInfoVo.setDescription(byId.getDescription());
+        return movieInfoVo;
+    }
+
+    @Override
+    public void updateMovieInfo(MovieInfoVo movieInfoVo) {
+        Movie movie = new Movie();
+        BeanUtils.copyProperties(movieInfoVo,movie);
+        int i = baseMapper.updateById(movie);
+        if (i == 0){
+            throw new LolException(ResultCode.FAIL,"修改失败");
+        }
+
+        MovieDescription movieDescription = new MovieDescription();
+        movieDescription.setId(movieInfoVo.getId());
+        movieDescription.setDescription(movieInfoVo.getDescription());
+        movieDescriptionService.updateById(movieDescription);
     }
 }
