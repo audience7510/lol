@@ -1,6 +1,8 @@
 package com.github.hero.controller;
 
 
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
 import com.github.hero.common.Result;
 import com.github.hero.common.ResultGenerator;
 import com.github.hero.pojo.ChapterVo;
@@ -39,6 +41,7 @@ public class ChapterController {
     //添加章节
     @PostMapping("addChapter")
     public Result addChapter(@RequestBody MovieChapter movieChapter) {
+        movieChapter.setCreateTime(DateUtil.now());
         chapterService.save(movieChapter);
         return ResultGenerator.success();
     }
@@ -53,6 +56,7 @@ public class ChapterController {
     //修改章节
     @PostMapping("updateChapter")
     public Result updateChapter(@RequestBody MovieChapter eduChapter) {
+        eduChapter.setUpdateTime(DateUtil.now());
         chapterService.updateById(eduChapter);
         return ResultGenerator.success();
     }
