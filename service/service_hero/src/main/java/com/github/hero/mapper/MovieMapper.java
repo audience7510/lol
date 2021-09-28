@@ -2,6 +2,7 @@ package com.github.hero.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.hero.pojo.Movie;
+import com.github.hero.pojo.PublishVo;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.github.hero.pojo.Movie;
  */
 public interface MovieMapper extends BaseMapper<Movie> {
 
+    PublishVo getPublishVo(String id);
 }

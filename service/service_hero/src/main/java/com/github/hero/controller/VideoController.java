@@ -4,6 +4,7 @@ import com.github.hero.common.Result;
 import com.github.hero.common.ResultGenerator;
 import com.github.hero.pojo.MovieVideo;
 import com.github.hero.service.IVideoService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/video")
+@Api(tags = "视频video管理")
 @CrossOrigin
 public class VideoController {
 

@@ -8,6 +8,7 @@ import com.github.hero.mapper.MovieMapper;
 import com.github.hero.pojo.Movie;
 import com.github.hero.pojo.MovieDescription;
 import com.github.hero.pojo.MovieInfoVo;
+import com.github.hero.pojo.PublishVo;
 import com.github.hero.service.IMovieDescriptionService;
 import com.github.hero.service.IMovieService;
 import org.springframework.beans.BeanUtils;
@@ -80,5 +81,10 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
         movieDescription.setId(movieInfoVo.getId());
         movieDescription.setDescription(movieInfoVo.getDescription());
         movieDescriptionService.updateById(movieDescription);
+    }
+
+    @Override
+    public PublishVo getPublishVo(String id) {
+        return baseMapper.getPublishVo(id);
     }
 }

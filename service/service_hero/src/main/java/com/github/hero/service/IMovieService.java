@@ -3,6 +3,7 @@ package com.github.hero.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.hero.pojo.Movie;
 import com.github.hero.pojo.MovieInfoVo;
+import com.github.hero.pojo.PublishVo;
 
 /**
  * <p>
@@ -20,4 +21,6 @@ public interface IMovieService extends IService<Movie> {
     MovieInfoVo getMovieInfo(String movieId);
 
     void updateMovieInfo(MovieInfoVo movieInfoVo);
+
+    PublishVo getPublishVo(String id);
 }
