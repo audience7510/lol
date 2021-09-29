@@ -1,15 +1,19 @@
 package com.github.hero.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.hero.common.Result;
 import com.github.hero.common.ResultGenerator;
-import com.github.hero.pojo.Movie;
-import com.github.hero.pojo.MovieInfoVo;
-import com.github.hero.pojo.PublishVo;
+import com.github.hero.pojo.*;
 import com.github.hero.service.IMovieService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -27,6 +31,32 @@ public class MovieController {
 
     @Autowired
     private IMovieService movieService;
+
+    @PostMapping("list/{current}/{size}")
+    public Result list(@PathVariable int current, @PathVariable int size,
+                       @RequestBody MovieQuery movieQuery) {
+        Page<Movie> page = new Page<>(current,size);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        String title = movieQuery.getTitle();
+        String status = movieQuery.getStatus();
+        String createTimeStart = movieQuery.getCreateTimeStart();
+        String createTimeEnd = movieQuery.getCreateTimeEnd();
+        if (!StringUtils.isEmpty(title)){
+            queryWrapper.like("title",title);
+        }
+        if (!StringUtils.isEmpty(status)){
+            queryWrapper.like("status",status);
+        }
+        if (!StringUtils.isEmpty(createTimeStart)){
+            queryWrapper.ge("create_time",createTimeStart);
+        }
+        if (!StringUtils.isEmpty(createTimeEnd)){
+            queryWrapper.le("create_time",createTimeEnd);
+        }
+        queryWrapper.orderByDesc("create_time");
+        IPage<Movie> ipage = movieService.page(page, queryWrapper);
+        return ResultGenerator.success(ipage);
+    }
 
     //添加课程基本信息的方法
     @PostMapping("addCourseInfo")
@@ -50,7 +80,7 @@ public class MovieController {
         return ResultGenerator.success();
     }
 
-    //根据课程id查询影视基本信息
+    //根据影视id查询影视基本信息
     @GetMapping("getPublishVo/{id}")
     public Result getPublishVo(@PathVariable String id) {
         PublishVo publishVo = movieService.getPublishVo(id);
