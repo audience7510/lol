@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.hero.common.ResultCode;
 import com.github.hero.handler.LolException;
 import com.github.hero.mapper.ChapterMapper;
-import com.github.hero.pojo.ChapterVo;
-import com.github.hero.pojo.MovieChapter;
-import com.github.hero.pojo.MovieVideo;
-import com.github.hero.pojo.VideoVo;
+import com.github.hero.pojo.*;
 import com.github.hero.service.IChapterService;
 import com.github.hero.service.IVideoService;
 import org.springframework.beans.BeanUtils;
@@ -98,5 +95,12 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, MovieChapter>
             //成功  1>0   0>0
             return result>0;
         }
+    }
+
+    @Override
+    public void removeByMovieId(String id) {
+        QueryWrapper<MovieChapter> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("movie_id",id);
+        baseMapper.delete(queryWrapper);
     }
 }

@@ -9,8 +9,10 @@ import com.github.hero.pojo.Movie;
 import com.github.hero.pojo.MovieDescription;
 import com.github.hero.pojo.MovieInfoVo;
 import com.github.hero.pojo.PublishVo;
+import com.github.hero.service.IChapterService;
 import com.github.hero.service.IMovieDescriptionService;
 import com.github.hero.service.IMovieService;
+import com.github.hero.service.IVideoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,12 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
     //课程描述注入
     @Autowired
     private IMovieDescriptionService movieDescriptionService;
+
+    @Autowired
+    private IVideoService videoService;
+
+    @Autowired
+    private IChapterService chapterService;
 
     //添加课程基本信息的方法
     @Override
@@ -86,5 +94,17 @@ public class MovieServiceImpl extends ServiceImpl<MovieMapper, Movie> implements
     @Override
     public PublishVo getPublishVo(String id) {
         return baseMapper.getPublishVo(id);
+    }
+
+    @Override
+    public void delete(String id) {
+        //删除小节
+        videoService.removeByMovieId(id);
+        //删除章节
+        chapterService.removeByMovieId(id);
+        //删除描述
+        movieDescriptionService.removeByMovieId(id);
+        //删除影视本身
+        baseMapper.deleteById(id);
     }
 }

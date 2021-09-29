@@ -13,4 +13,5 @@ import com.github.hero.pojo.MovieDescription;
  */
 public interface IMovieDescriptionService extends IService<MovieDescription> {
 
+    void removeByMovieId(String id);
 }

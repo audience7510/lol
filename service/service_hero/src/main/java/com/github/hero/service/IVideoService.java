@@ -13,4 +13,5 @@ import com.github.hero.pojo.MovieVideo;
  */
 public interface IVideoService extends IService<MovieVideo> {
 
+    void removeByMovieId(String id);
 }

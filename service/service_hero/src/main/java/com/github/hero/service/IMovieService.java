@@ -23,4 +23,6 @@ public interface IMovieService extends IService<Movie> {
     void updateMovieInfo(MovieInfoVo movieInfoVo);
 
     PublishVo getPublishVo(String id);
+
+    void delete(String id);
 }

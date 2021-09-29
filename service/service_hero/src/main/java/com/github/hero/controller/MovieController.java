@@ -32,6 +32,7 @@ public class MovieController {
     @Autowired
     private IMovieService movieService;
 
+    //影视列表分页查询
     @PostMapping("list/{current}/{size}")
     public Result list(@PathVariable int current, @PathVariable int size,
                        @RequestBody MovieQuery movieQuery) {
@@ -95,6 +96,12 @@ public class MovieController {
         //已发布
         movie.setStatus("Normal");
         movieService.updateById(movie);
+        return ResultGenerator.success();
+    }
+
+    @DeleteMapping("delete/{id}")
+    public Result delete(@PathVariable String id) {
+        movieService.delete(id);
         return ResultGenerator.success();
     }
 }

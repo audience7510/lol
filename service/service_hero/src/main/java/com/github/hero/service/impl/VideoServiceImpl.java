@@ -1,5 +1,6 @@
 package com.github.hero.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.hero.mapper.VideoMapper;
 import com.github.hero.pojo.MovieVideo;
@@ -17,4 +18,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class VideoServiceImpl extends ServiceImpl<VideoMapper, MovieVideo> implements IVideoService {
 
+    @Override
+    public void removeByMovieId(String id) {
+        QueryWrapper<MovieVideo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("movie_id",id);
+        baseMapper.delete(queryWrapper);
+    }
 }

@@ -21,4 +21,6 @@ public interface IChapterService extends IService<MovieChapter> {
 
     //删除章节的方法
     boolean deleteChapter(String chapterId);
+
+    void removeByMovieId(String id);
 }
